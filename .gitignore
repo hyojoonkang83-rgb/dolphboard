@@ -1,0 +1,8 @@
+node_modules
+dist
+.turbo
+*.db
+uploads/
+.env
+.env.local
+docs/create-archive.js
