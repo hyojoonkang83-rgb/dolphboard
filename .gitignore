@@ -2,7 +2,10 @@ node_modules
 dist
 .turbo
 *.db
+*.db-shm
+*.db-wal
 uploads/
+apps/server/data/
 .env
 .env.local
 docs/create-archive.js

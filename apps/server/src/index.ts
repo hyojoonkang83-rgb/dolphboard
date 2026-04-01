@@ -2,17 +2,27 @@ import { serve } from '@hono/node-server';
 import { createApp } from './api/app.js';
 import { runMigrations } from './db/migrate.js';
 import { env } from './config/env.js';
+import { setupWebSocket } from './ws/setupWebSocket.js';
 
-runMigrations();
+async function main() {
+  await runMigrations();
 
-const app = createApp();
+  const app = createApp();
 
-serve(
-  {
-    fetch: app.fetch,
-    port: env.PORT,
-  },
-  (info) => {
-    console.log(`✓ API server running at http://localhost:${info.port}`);
-  },
-);
+  serve(
+    {
+      fetch: app.fetch,
+      port: env.PORT,
+    },
+    (info) => {
+      console.log(`✓ API server running at http://localhost:${info.port}`);
+    },
+  );
+
+  setupWebSocket(env.YJS_PORT);
+}
+
+main().catch((err) => {
+  console.error('Fatal startup error:', err);
+  process.exit(1);
+});

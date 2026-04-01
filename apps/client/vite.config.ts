@@ -8,13 +8,16 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:3000',
       '/uploads': 'http://localhost:3000',
+      '/rooms': {
+        target: 'ws://localhost:1234',
+        ws: true,
+      },
     },
   },
   optimizeDeps: {
     include: [
-      'lodash.isequalwith',
       '@tldraw/tldraw',
-      '@tldraw/editor',
+      '@tldraw/sync',
     ],
   },
 });

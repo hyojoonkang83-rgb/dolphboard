@@ -1,15 +1,26 @@
-import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
+import { pgTable, text, boolean, doublePrecision, timestamp } from 'drizzle-orm/pg-core';
 
-export const projects = sqliteTable('projects', {
+export const users = pgTable('users', {
   id: text('id').primaryKey(),
+  email: text('email').notNull().unique(),
+  name: text('name').notNull(),
+  passwordHash: text('password_hash').notNull(),
+  color: text('color').notNull().default('#6366f1'),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const projects = pgTable('projects', {
+  id: text('id').primaryKey(),
+  userId: text('user_id').references(() => users.id, { onDelete: 'cascade' }),
   name: text('name').notNull(),
   description: text('description'),
   color: text('color').notNull().default('#6366f1'),
-  createdAt: text('created_at').notNull(),
-  updatedAt: text('updated_at').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const boards = sqliteTable('boards', {
+export const boards = pgTable('boards', {
   id: text('id').primaryKey(),
   projectId: text('project_id')
     .notNull()
@@ -17,11 +28,11 @@ export const boards = sqliteTable('boards', {
   name: text('name').notNull(),
   description: text('description'),
   thumbnail: text('thumbnail'),
-  createdAt: text('created_at').notNull(),
-  updatedAt: text('updated_at').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const comments = sqliteTable('comments', {
+export const comments = pgTable('comments', {
   id: text('id').primaryKey(),
   boardId: text('board_id')
     .notNull()
@@ -29,18 +40,18 @@ export const comments = sqliteTable('comments', {
   authorName: text('author_name').notNull(),
   authorColor: text('author_color').notNull(),
   content: text('content').notNull(),
-  x: real('x').notNull(),
-  y: real('y').notNull(),
+  x: doublePrecision('x').notNull(),
+  y: doublePrecision('y').notNull(),
   parentId: text('parent_id'),
-  resolved: integer('resolved', { mode: 'boolean' }).notNull().default(false),
-  createdAt: text('created_at').notNull(),
-  updatedAt: text('updated_at').notNull(),
+  resolved: boolean('resolved').notNull().default(false),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });
 
-export const boardDocuments = sqliteTable('board_documents', {
+export const boardDocuments = pgTable('board_documents', {
   boardId: text('board_id')
     .primaryKey()
     .references(() => boards.id, { onDelete: 'cascade' }),
   document: text('document').notNull().default(''),
-  updatedAt: text('updated_at').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 });

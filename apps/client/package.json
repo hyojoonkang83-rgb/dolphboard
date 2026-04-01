@@ -9,6 +9,7 @@
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@tldraw/sync": "3.15.6",
     "@tldraw/tldraw": "^3.8.0",
     "@whiteboard/shared": "workspace:*",
     "react": "^18.3.1",

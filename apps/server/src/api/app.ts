@@ -7,27 +7,39 @@ import { fail } from '@whiteboard/shared';
 import { projectsRouter } from './routes/projects.js';
 import { boardsRouter } from './routes/boards.js';
 import { uploadRouter } from './routes/upload.js';
+import { commentsRouter } from './routes/comments.js';
+import { authRouter } from './routes/auth.js';
+import { env } from '../config/env.js';
 
 export function createApp() {
   const app = new Hono();
 
   app.use('*', logger());
+  const allowedOrigins = env.NODE_ENV === 'production'
+    ? [env.CLIENT_URL]
+    : ['http://localhost:5173', 'http://localhost:4173'];
+
   app.use(
     '*',
     cors({
-      origin: ['http://localhost:5173', 'http://localhost:4173'],
-      allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+      origin: allowedOrigins,
+      allowMethods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
       allowHeaders: ['Content-Type', 'Authorization'],
+      credentials: true,
     }),
   );
 
   // Serve uploaded files
   app.use('/uploads/*', serveStatic({ root: './' }));
 
-  // API routes
+  // Auth routes (public)
+  app.route('/api/auth', authRouter);
+
+  // Protected API routes
   app.route('/api/projects', projectsRouter);
   app.route('/api/boards', boardsRouter);
   app.route('/api/upload', uploadRouter);
+  app.route('/api/boards/:boardId/comments', commentsRouter);
 
   // Health check
   app.get('/health', (c) => c.json({ status: 'ok' }));
@@ -35,7 +47,7 @@ export function createApp() {
   // Error handler
   app.onError((err, c) => {
     if (err instanceof AppError) {
-      return c.json(fail(err.message), err.statusCode as 400 | 404 | 500);
+      return c.json(fail(err.message), err.statusCode as 400 | 401 | 404 | 409 | 500);
     }
     console.error('Unhandled error:', err);
     return c.json(fail('Internal server error'), 500);

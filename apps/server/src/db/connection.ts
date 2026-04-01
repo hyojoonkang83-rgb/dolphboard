@@ -1,24 +1,35 @@
-import Database from 'better-sqlite3';
-import { drizzle } from 'drizzle-orm/better-sqlite3';
-import { mkdirSync } from 'fs';
-import { dirname } from 'path';
 import { env } from '../config/env.js';
 import * as schema from './schema.js';
+import { resolve } from 'path';
 
-function createConnection() {
-  const dbPath = env.DATABASE_URL;
+const url = env.DATABASE_URL;
+const isPg = url.startsWith('postgresql://') || url.startsWith('postgres://');
 
-  // Ensure the data directory exists
-  mkdirSync(dirname(dbPath), { recursive: true });
+let db: Awaited<ReturnType<typeof createDb>>;
 
-  const sqlite = new Database(dbPath);
-
-  // Performance pragmas
-  sqlite.pragma('journal_mode = WAL');
-  sqlite.pragma('foreign_keys = ON');
-
-  return drizzle(sqlite, { schema });
+async function createDb() {
+  if (isPg) {
+    // Production: real PostgreSQL
+    const { default: postgres } = await import('postgres');
+    const { drizzle } = await import('drizzle-orm/postgres-js');
+    const client = postgres(url, { max: 10, idle_timeout: 30, connect_timeout: 10 });
+    return drizzle(client, { schema });
+  } else {
+    // Local dev: PGlite — no PostgreSQL installation needed
+    const { mkdirSync, existsSync } = await import('fs');
+    const { dirname } = await import('path');
+    // PGlite requires absolute path
+    const absPath = resolve(url);
+    const dir = dirname(absPath);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    const { PGlite } = await import('@electric-sql/pglite');
+    const { drizzle } = await import('drizzle-orm/pglite');
+    const client = new PGlite(absPath);
+    return drizzle(client, { schema });
+  }
 }
 
-export const db = createConnection();
+db = await createDb();
+
+export { db };
 export type DB = typeof db;
