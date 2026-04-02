@@ -1,6 +1,8 @@
 import { sql } from 'drizzle-orm';
 import { db } from './connection.js';
 
+export const GUEST_USER_ID = 'guest-default-user';
+
 export async function runMigrations() {
   await db.execute(sql`
     CREATE TABLE IF NOT EXISTS users (
@@ -66,6 +68,13 @@ export async function runMigrations() {
   await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_projects_user_id ON projects(user_id)`);
   await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_boards_project_id ON boards(project_id)`);
   await db.execute(sql`CREATE INDEX IF NOT EXISTS idx_comments_board_id ON comments(board_id)`);
+
+  // 기본 게스트 유저 (로그인 없이 사용)
+  await db.execute(sql`
+    INSERT INTO users (id, email, name, password_hash, color)
+    VALUES (${GUEST_USER_ID}, 'guest@dolphboard.local', 'Guest', 'no-password', '#6366f1')
+    ON CONFLICT (id) DO NOTHING
+  `);
 
   console.log('✓ Migrations complete');
 }
