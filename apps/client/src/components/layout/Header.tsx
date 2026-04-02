@@ -37,7 +37,7 @@ export function Header({ title, back, actions }: HeaderProps) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
             </svg>
           </div>
-          <span className="font-semibold text-gray-900 text-sm">Whiteboard</span>
+          <span className="font-semibold text-gray-900 text-sm">Dolphboard</span>
         </Link>
       )}
       {title && <span className="font-medium text-gray-900 text-sm truncate">{title}</span>}

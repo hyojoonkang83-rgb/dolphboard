@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router';
-import { WhiteboardCanvas } from '../components/canvas/WhiteboardCanvas.js';
+import { DolphboardCanvas } from '../components/canvas/DolphboardCanvas.js';
 import { CommentToggle } from '../components/comments/CommentToggle.js';
 import { useComments } from '../hooks/useComments.js';
 import type { UseCommentsResult } from '../hooks/useComments.js';
@@ -56,7 +56,7 @@ export function BoardPage() {
         onToggleCommentMode={() => setCommentMode((v) => !v)}
         commentCount={commentsApi.rootComments.length}
       />
-      <WhiteboardCanvas
+      <DolphboardCanvas
         boardId={boardId}
         commentMode={commentMode}
         onCommentModeOff={() => setCommentMode(false)}

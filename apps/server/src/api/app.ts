@@ -3,7 +3,7 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { serveStatic } from '@hono/node-server/serve-static';
 import { AppError } from '../utils/errors.js';
-import { fail } from '@whiteboard/shared';
+import { fail } from '@dolphboard/shared';
 import { projectsRouter } from './routes/projects.js';
 import { boardsRouter } from './routes/boards.js';
 import { uploadRouter } from './routes/upload.js';

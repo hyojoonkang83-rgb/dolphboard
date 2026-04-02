@@ -11,7 +11,7 @@ module.exports = {
         NODE_ENV: 'development',
         PORT: '3000',
         YJS_PORT: '1234',
-        DATABASE_URL: './data/whiteboard.db',   // PGlite (로컬 파일, PostgreSQL 설치 불필요)
+        DATABASE_URL: './data/dolphboard.db',   // PGlite (로컬 파일, PostgreSQL 설치 불필요)
         JWT_SECRET: 'dev-secret-change-in-production',
         STORAGE_TYPE: 'local',
         UPLOAD_DIR: './uploads',

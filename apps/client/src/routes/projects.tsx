@@ -46,7 +46,7 @@ export function ProjectsPage() {
       <main className="pt-16 px-6 max-w-6xl mx-auto">
         <div className="py-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Projects</h1>
-          <p className="text-gray-500 text-sm">Manage your design projects and whiteboards</p>
+          <p className="text-gray-500 text-sm">Manage your design projects and dolphboards</p>
         </div>
 
         {loading && (

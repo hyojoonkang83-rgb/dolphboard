@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Board, CreateBoardInput } from '@whiteboard/shared';
+import type { Board, CreateBoardInput } from '@dolphboard/shared';
 import { api } from '../lib/api.js';
 
 export function useBoards(projectId: string) {

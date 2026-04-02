@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
 import { setCookie, deleteCookie } from 'hono/cookie';
-import { ok, fail } from '@whiteboard/shared';
+import { ok, fail } from '@dolphboard/shared';
 import { userRepo } from '../../repositories/userRepo.js';
 import { hashPassword, verifyPassword } from '../../auth/password.js';
 import { signToken } from '../../auth/jwt.js';

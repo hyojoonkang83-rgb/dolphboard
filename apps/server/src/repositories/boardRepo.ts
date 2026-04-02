@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import type { Board, CreateBoardInput, UpdateBoardInput } from '@whiteboard/shared';
+import type { Board, CreateBoardInput, UpdateBoardInput } from '@dolphboard/shared';
 import { db } from '../db/connection.js';
 import { boards, boardDocuments, projects } from '../db/schema.js';
 import { generateId, now } from '../utils/id.js';

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { Comment, CreateCommentInput, UpdateCommentInput } from '@whiteboard/shared';
+import type { Comment, CreateCommentInput, UpdateCommentInput } from '@dolphboard/shared';
 import { api } from '../lib/api.js';
 
 const POLL_INTERVAL = 3000;

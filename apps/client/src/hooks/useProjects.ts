@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import type { Project, CreateProjectInput } from '@whiteboard/shared';
+import type { Project, CreateProjectInput } from '@dolphboard/shared';
 import { api } from '../lib/api.js';
 
 export function useProjects() {

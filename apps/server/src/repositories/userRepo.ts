@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import type { User } from '@whiteboard/shared';
+import type { User } from '@dolphboard/shared';
 import { db } from '../db/connection.js';
 import { users } from '../db/schema.js';
 import { generateId, now } from '../utils/id.js';

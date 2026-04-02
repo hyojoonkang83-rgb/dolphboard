@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import type { User, LoginInput, SignupInput } from '@whiteboard/shared';
+import type { User, LoginInput, SignupInput } from '@dolphboard/shared';
 import { api } from '../lib/api.js';
 
 interface AuthContextValue {

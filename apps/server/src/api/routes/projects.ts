@@ -1,7 +1,7 @@
 import { Hono } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
-import { ok } from '@whiteboard/shared';
+import { ok } from '@dolphboard/shared';
 import { projectRepo } from '../../repositories/projectRepo.js';
 import { boardRepo } from '../../repositories/boardRepo.js';
 import { NotFoundError, ForbiddenError } from '../../utils/errors.js';

@@ -45,7 +45,7 @@ export function ProjectPage() {
       <main className="pt-16 px-6 max-w-6xl mx-auto">
         <div className="py-8">
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Boards</h1>
-          <p className="text-gray-500 text-sm">Click a board to open the whiteboard canvas</p>
+          <p className="text-gray-500 text-sm">Click a board to open the dolphboard canvas</p>
         </div>
 
         {loading && (

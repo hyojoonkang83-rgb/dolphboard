@@ -1,5 +1,5 @@
 {
-  "name": "@whiteboard/client",
+  "name": "@dolphboard/client",
   "version": "0.0.1",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "@tldraw/sync": "3.15.6",
     "@tldraw/tldraw": "^3.8.0",
-    "@whiteboard/shared": "workspace:*",
+    "@dolphboard/shared": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router": "^7.1.3",

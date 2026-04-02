@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { ok, fail } from '@whiteboard/shared';
+import { ok, fail } from '@dolphboard/shared';
 import { generateId } from '../../utils/id.js';
 import { storage } from '../../storage/index.js';
 import { requireAuth } from '../middleware/auth.js';

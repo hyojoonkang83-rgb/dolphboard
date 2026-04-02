@@ -15,7 +15,7 @@ import { getSessionUserInfo } from '../../lib/userInfo.js';
 import { CommentsOverlay } from '../comments/CommentsOverlay.js';
 import type { UseCommentsResult } from '../../hooks/useComments.js';
 
-interface WhiteboardCanvasProps {
+interface DolphboardCanvasProps {
   boardId: string;
   commentMode: boolean;
   onCommentModeOff: () => void;
@@ -32,7 +32,7 @@ const assetStore: TLAssetStore = {
   },
 };
 
-export function WhiteboardCanvas({ boardId, commentMode, onCommentModeOff, commentsApi }: WhiteboardCanvasProps) {
+export function DolphboardCanvas({ boardId, commentMode, onCommentModeOff, commentsApi }: DolphboardCanvasProps) {
   const editorRef = useRef<Editor | null>(null);
   const [editor, setEditor] = useState<Editor | null>(null);
   const { user } = useAuth();
@@ -98,7 +98,7 @@ export function WhiteboardCanvas({ boardId, commentMode, onCommentModeOff, comme
             props: { assetId, w: 400, h: 300 },
           });
         } catch (err) {
-          console.error(`[WhiteboardCanvas] Failed to upload ${file.name}:`, err);
+          console.error(`[DolphboardCanvas] Failed to upload ${file.name}:`, err);
         }
       }
     },

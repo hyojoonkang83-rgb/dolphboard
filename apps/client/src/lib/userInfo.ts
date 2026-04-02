@@ -19,7 +19,7 @@ function generateUserInfo() {
   };
 }
 
-const SESSION_KEY = 'whiteboard_user_info';
+const SESSION_KEY = 'dolphboard_user_info';
 
 export function getSessionUserInfo(): { id: string; name: string; color: string } {
   try {

@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import type { Project, CreateProjectInput, UpdateProjectInput } from '@whiteboard/shared';
+import type { Project, CreateProjectInput, UpdateProjectInput } from '@dolphboard/shared';
 import { db } from '../db/connection.js';
 import { projects } from '../db/schema.js';
 import { generateId, now } from '../utils/id.js';

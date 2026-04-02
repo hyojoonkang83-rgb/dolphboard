@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import type { Comment, CreateCommentInput, UpdateCommentInput } from '@whiteboard/shared';
+import type { Comment, CreateCommentInput, UpdateCommentInput } from '@dolphboard/shared';
 import { db } from '../db/connection.js';
 import { comments } from '../db/schema.js';
 import { generateId, now } from '../utils/id.js';

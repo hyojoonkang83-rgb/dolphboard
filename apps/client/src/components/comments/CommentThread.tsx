@@ -1,4 +1,4 @@
-import type { Comment } from '@whiteboard/shared';
+import type { Comment } from '@dolphboard/shared';
 import { CommentInput } from './CommentInput.js';
 
 interface CommentThreadProps {

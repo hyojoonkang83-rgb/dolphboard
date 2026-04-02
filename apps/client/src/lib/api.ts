@@ -1,4 +1,4 @@
-import type { ApiResponse, Comment, CreateCommentInput, UpdateCommentInput, User, LoginInput, SignupInput } from '@whiteboard/shared';
+import type { ApiResponse, Comment, CreateCommentInput, UpdateCommentInput, User, LoginInput, SignupInput } from '@dolphboard/shared';
 
 const BASE = '/api';
 

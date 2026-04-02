@@ -1,4 +1,4 @@
-import type { Comment } from '@whiteboard/shared';
+import type { Comment } from '@dolphboard/shared';
 
 interface CommentPinProps {
   comment: Comment;
