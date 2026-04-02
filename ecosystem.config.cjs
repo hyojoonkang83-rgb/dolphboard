@@ -11,7 +11,6 @@ module.exports = {
       env: {
         NODE_ENV: 'production',
         PORT: '3000',
-        YJS_PORT: '1234',
         DATABASE_URL: './data/dolphboard.db',
         JWT_SECRET: 'dev-secret-change-in-production',
         STORAGE_TYPE: 'local',

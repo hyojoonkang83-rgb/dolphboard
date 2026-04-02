@@ -1,6 +1,5 @@
 import { env } from '../config/env.js';
 import * as schema from './schema.js';
-import { resolve } from 'path';
 
 const url = env.DATABASE_URL;
 const isPg = url.startsWith('postgresql://') || url.startsWith('postgres://');
@@ -17,7 +16,7 @@ async function createDb() {
   } else {
     // Local dev: PGlite — no PostgreSQL installation needed
     const { mkdirSync, existsSync } = await import('fs');
-    const { dirname } = await import('path');
+    const { resolve, dirname } = await import('path');
     // PGlite requires absolute path
     const absPath = resolve(url);
     const dir = dirname(absPath);

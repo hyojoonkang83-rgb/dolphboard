@@ -18,7 +18,7 @@ export function createS3Storage(): StorageProvider {
   const bucket = env.S3_BUCKET!;
   const cdnUrl = env.S3_CDN_URL;
 
-  return {
+  const storage: StorageProvider = {
     async upload(key: string, buffer: Buffer, contentType: string): Promise<string> {
       await client.send(
         new PutObjectCommand({
@@ -28,7 +28,7 @@ export function createS3Storage(): StorageProvider {
           ContentType: contentType,
         }),
       );
-      return createS3Storage().getUrl(key);
+      return storage.getUrl(key);
     },
 
     async delete(key: string): Promise<void> {
@@ -41,4 +41,5 @@ export function createS3Storage(): StorageProvider {
       return `https://${bucket}.s3.${env.AWS_REGION ?? 'us-east-1'}.amazonaws.com/${key}`;
     },
   };
+  return storage;
 }
