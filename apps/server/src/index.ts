@@ -9,17 +9,17 @@ async function main() {
 
   const app = createApp();
 
-  serve(
+  const server = serve(
     {
       fetch: app.fetch,
       port: env.PORT,
     },
     (info) => {
-      console.log(`✓ API server running at http://localhost:${info.port}`);
+      console.log(`✓ Server running at http://localhost:${info.port}`);
     },
   );
 
-  setupWebSocket(env.YJS_PORT);
+  setupWebSocket(server);
 }
 
 main().catch((err) => {
