@@ -1,3 +1,5 @@
+import { readFileSync, existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
@@ -15,9 +17,12 @@ export function createApp() {
   const app = new Hono();
 
   app.use('*', logger());
+  const clientDistPath = resolve(process.cwd(), '../client/dist');
+  const hasClientDist = existsSync(`${clientDistPath}/index.html`);
+
   const allowedOrigins = env.NODE_ENV === 'production'
     ? [env.CLIENT_URL]
-    : ['http://localhost:5173', 'http://localhost:4173'];
+    : ['http://localhost:5173', 'http://localhost:4173', `http://localhost:${env.PORT}`];
 
   app.use(
     '*',
@@ -43,6 +48,15 @@ export function createApp() {
 
   // Health check
   app.get('/health', (c) => c.json({ status: 'ok' }));
+
+  // Serve built client files (SPA)
+  if (hasClientDist) {
+    app.use('/*', serveStatic({ root: '../client/dist' }));
+    app.notFound((c) => {
+      const html = readFileSync(`${clientDistPath}/index.html`, 'utf-8');
+      return c.html(html);
+    });
+  }
 
   // Error handler
   app.onError((err, c) => {

@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router';
 import { DolphboardCanvas } from '../components/canvas/DolphboardCanvas.js';
 import { CommentToggle } from '../components/comments/CommentToggle.js';
 import { useComments } from '../hooks/useComments.js';
-import type { UseCommentsResult } from '../hooks/useComments.js';
 
 interface BoardHeaderProps {
   commentMode: boolean;
